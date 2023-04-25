@@ -2,17 +2,17 @@ package org.team42.inventory_system.persistence;
 
 public class StorageDAOFactory {
     
-    private static StorageDAOFactory theInstance = null;
+    private static StorageDAOFactory Instance = null;
 
     private StorageDAOFactory() {
 
     }
 
     public static StorageDAOFactory getInstance(){
-        if (theInstance == null) {
-			theInstance = new StorageDAOFactory();
+        if (Instance == null) {
+			Instance = new StorageDAOFactory();
 		}
-		return theInstance;
+		return Instance;
     }
 
     public StorageDAOInterface createStorageDAO(){

@@ -5,7 +5,7 @@ public class StorageDAOMock implements StorageDAOInterface {
     private int[] id;
     private String[] friendlyName;
     private int itemCounter;
-    private final int MAX_items = 10;
+    private final int MAX_ITEMS = 10;
 
     public StorageDAOMock(){
         itemCounter = 0;
