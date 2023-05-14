@@ -1,20 +1,18 @@
 package org.team42.inventory_system.business;
 
-import org.team42.inventory_system.persistence.StorageDAOInterface;
-import org.team42.inventory_system.persistence.StorageDAOFactory;
-
 public class AbstractItem implements ItemInterface {
+
+    private int id;
+    private String friendlyName;
 
     @Override
     public int getId() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getId'");
+        return id;
     }
 
     @Override
     public String getFriendlyName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getFriendlyName'");
+        return friendlyName;
     }
     
 }

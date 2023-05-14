@@ -1,7 +1,22 @@
 package org.team42.inventory_system.presentation;
 
+import org.team42.inventory_system.business.ItemFactory;
+import org.team42.inventory_system.business.ItemInterface;
+import org.team42.inventory_system.persistence.StorageDAOFactory;
+
 public class ConsoleApplication {
 	public static void main(String[] args) {
-		System.out.println("It works");
+		System.out.println("App started!");
+
+		//create factories
+		StorageDAOFactory storageDAOFactory = StorageDAOFactory.getInstance();		
+		ItemFactory itemFactory = ItemFactory.getInstance();
+
+		ItemInterface item = ItemFactory.createItem(42, "Canon EOS 5DIV");
+		itemFactory.saveItem(item);
+
+		System.out.println("Item ID is " + item.getId());
+		System.out.println("Item name is " + item.getFriendlyName());
+
 	}
 }

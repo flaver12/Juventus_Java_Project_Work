@@ -2,7 +2,7 @@ package org.team42.inventory_system.persistence;
 
 public interface StorageDAOInterface {
     
-    public void createItem(int id, String friendlyName);
-    public void getItem (int id);
+    public void insertItem(int id, String friendlyName);
+    public String getItem (int id);
 
 }
