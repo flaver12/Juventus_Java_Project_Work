@@ -1,6 +1,6 @@
 package org.team42.inventory_system.business;
 
-public class AbstractItem implements ItemInterface {
+public class AbstractItem implements Item {
 
     protected int id;
     protected String friendlyName;

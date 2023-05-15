@@ -19,11 +19,11 @@ public class ItemFactory {
 		return theInstance;
 	}
     
-    public static Item createItem(int id, String friendlyName){
-        return new Item(id, friendlyName);
+    public static BcItem createItem(int id, String friendlyName){
+        return new BcItem(id, friendlyName);
     }
 
-    public void saveItem(ItemInterface item) {
+    public void saveItem(Item item) {
         storageDAO.insertItem(item.getId(), item.getFriendlyName());
     }
 }
