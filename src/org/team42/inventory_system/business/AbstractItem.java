@@ -2,8 +2,8 @@ package org.team42.inventory_system.business;
 
 public class AbstractItem implements ItemInterface {
 
-    private int id;
-    private String friendlyName;
+    protected int id;
+    protected String friendlyName;
 
     @Override
     public int getId() {
