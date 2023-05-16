@@ -12,19 +12,30 @@ public class StorageDAOMock implements StorageDAOInterface {
 	private List<StorageDAOSpecification> items = new ArrayList<StorageDAOSpecification>();
 
 	@Override
-	public void insertItem(String friendlyName) {
+	public StorageDAOSpecification insertItem(String friendlyName) {
 		final int generatedId = next();
 		this.items.add(generatedId, new StorageDAOSpecification(generatedId, friendlyName));
+		return this.items.get(generatedId);
 	}
 
 	@Override
-	public void updateItem(int itemId, String friendlyName) {
-		this.items.get(itemId).setFriendlyName(friendlyName);
+	public StorageDAOSpecification updateItem(int itemId, String friendlyName) {
+		try {
+			this.items.get(itemId).setFriendlyName(friendlyName);
+			return this.items.get(itemId);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+
 	}
 
 	@Override
 	public StorageDAOSpecification getItem(int itemId) {
-		return this.items.get(itemId);
+		try {
+			return this.items.get(itemId);
+		} catch (IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 
 	@Override

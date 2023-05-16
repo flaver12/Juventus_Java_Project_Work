@@ -30,16 +30,25 @@ public class ItemFactory {
 		return new BcItem(friendlyName);
 	}
 
-	public void saveItem(Item item) {
-		storageDAO.insertItem(item.getFriendlyName());
+	public BcItem saveItem(Item item) {
+		return storageDAO.insertItem(item.getFriendlyName()).toBcItem();
 	}
 
-	public void updateItem(Item item) {
-		storageDAO.updateItem(item.getId(), item.getFriendlyName());
+	public BcItem updateItem(Item item) {
+		try {
+			return storageDAO.updateItem(item.getId(), item.getFriendlyName()).toBcItem();
+		} catch (NullPointerException e) {
+			return null;
+		}
+		
 	}
 
 	public Item getItem(int itemId) {
-		return storageDAO.getItem(itemId).toBcItem();
+		try {
+			return storageDAO.getItem(itemId).toBcItem();
+		} catch (NullPointerException e) {
+			return null;
+		}
 	}
 
 	public List<Item> getItems() {

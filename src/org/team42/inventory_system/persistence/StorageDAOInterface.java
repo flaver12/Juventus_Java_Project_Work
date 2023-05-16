@@ -6,9 +6,9 @@ import org.team42.inventory_system.persistence.spec.StorageDAOSpecification;
 
 public interface StorageDAOInterface {
 
-	public void insertItem(String friendlyName);
+	public StorageDAOSpecification insertItem(String friendlyName);
 
-	public void updateItem(int itemId, String friendlyName);
+	public StorageDAOSpecification updateItem(int itemId, String friendlyName);
 
 	public StorageDAOSpecification getItem(int itemId);
 
