@@ -7,14 +7,24 @@ public class ConsoleApplication {
 	public static void main(String[] args) {
 		System.out.println("App started!");
 
-		//create factories
+		// create factories
 		ItemFactory itemFactory = ItemFactory.getInstance();
 
-		Item item = ItemFactory.createItem(42, "Canon EOS 5DIV");
+		// Create and saves items
+		Item item = ItemFactory.createItem("Canon EOS 5DIV");
+		Item item2 = ItemFactory.createItem("NIKON D850");
 		itemFactory.saveItem(item);
+		itemFactory.saveItem(item2);
 
-		System.out.println("Item ID is " + item.getId());
-		System.out.println("Item name is " + item.getFriendlyName());
+		// Prints out all items
+		itemFactory.getItems().stream().map(i -> i.getId() + " - " + i.getFriendlyName()).forEach(System.out::println);
 
+		// Gets and updates items
+		Item item3 = itemFactory.getItem(1);
+		item3.setFriendlyName("NIKON D750");
+		itemFactory.updateItem(item3);
+
+		// Prints out all items with updated value
+		itemFactory.getItems().stream().map(i -> i.getId() + " - " + i.getFriendlyName()).forEach(System.out::println);
 	}
 }

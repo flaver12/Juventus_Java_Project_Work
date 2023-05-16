@@ -1,28 +1,38 @@
 package org.team42.inventory_system.persistence;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.team42.inventory_system.persistence.spec.StorageDAOSpecification;
+
 public class StorageDAOMock implements StorageDAOInterface {
 
-    private int[] id;
-    private String[] friendlyName;
-    private int itemCounter;
-    private final int MAX_ITEMS = 10;
+	private static final AtomicInteger sequence = new AtomicInteger();
+	private List<StorageDAOSpecification> items = new ArrayList<StorageDAOSpecification>();
 
-    public StorageDAOMock(){
-        id = new int[MAX_ITEMS];
-        friendlyName = new String[MAX_ITEMS];
-        itemCounter = 0;
-    }
+	@Override
+	public void insertItem(String friendlyName) {
+		final int generatedId = next();
+		this.items.add(generatedId, new StorageDAOSpecification(generatedId, friendlyName));
+	}
 
-    @Override
-    public void insertItem(int id, String friendlyName) {
-        this.id[itemCounter] = id;
-        this.friendlyName[itemCounter] = friendlyName;
-        itemCounter++;
-    }
+	@Override
+	public void updateItem(int itemId, String friendlyName) {
+		this.items.get(itemId).setFriendlyName(friendlyName);
+	}
 
-    @Override
-    public String getItem(int itemId) {
-        return friendlyName[itemId];
-    }
-    
+	@Override
+	public StorageDAOSpecification getItem(int itemId) {
+		return this.items.get(itemId);
+	}
+
+	@Override
+	public List<StorageDAOSpecification> getItems() {
+		return this.items;
+	}
+
+	private static int next() {
+		return sequence.getAndIncrement();
+	}
 }
