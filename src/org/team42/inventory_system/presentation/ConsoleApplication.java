@@ -27,24 +27,24 @@ public class ConsoleApplication {
 		String action = reader.readLine();
 
 		switch (action.toUpperCase()) {
-		case "C":
-			createItem();
-			break;
-		case "U":
-			updateItem();
-			break;
-		case "G":
-			getItem();
-			break;
-		case "L":
-			listItems();
-			break;
-		case "E":
-			System.out.println("Goodbye!");
-			System.exit(0);
-			break;
-		default:
-			System.out.println("Please enter a valid option");
+			case "C":
+				createItem();
+				break;
+			case "U":
+				updateItem();
+				break;
+			case "G":
+				getItem();
+				break;
+			case "L":
+				listItems();
+				break;
+			case "E":
+				System.out.println("Goodbye!");
+				System.exit(0);
+				break;
+			default:
+				System.out.println("Please enter a valid option");
 		}
 		System.out.println("Press enter to continue...");
 		reader.readLine();
@@ -56,12 +56,12 @@ public class ConsoleApplication {
 		String friendlyName = reader.readLine();
 
 		switch (friendlyName) {
-		case "":
-			System.out.println("No name entered, exiting action...");
-			break;
-		default:
-			Item item = itemFactory.saveItem(ItemFactory.createItem(friendlyName));
-			System.out.println("Created new item: " + item.getId() + " - " + item.getFriendlyName());
+			case "":
+				System.out.println("No name entered, exiting action...");
+				break;
+			default:
+				Item item = itemFactory.saveItem(ItemFactory.createItem(friendlyName));
+				System.out.println("Created new item: " + item.getId() + " - " + item.getFriendlyName());
 		}
 
 	}
@@ -80,16 +80,16 @@ public class ConsoleApplication {
 		String friendlyName = reader.readLine();
 
 		switch (friendlyName) {
-		case "":
-			System.out.println("No name entered, exiting action...");
-			break;
-		default:
-			try {
-				Item item = itemFactory.updateItem(ItemFactory.createItem(itemId, friendlyName));
-				System.out.println("Updated item: " + item.getId() + " - " + item.getFriendlyName());
-			} catch (NullPointerException e) {
-				System.out.println("No item found with provided id=" + itemId + ", exiting action...");
-			}
+			case "":
+				System.out.println("No name entered, exiting action...");
+				break;
+			default:
+				try {
+					Item item = itemFactory.updateItem(ItemFactory.createItem(itemId, friendlyName));
+					System.out.println("Updated item: " + item.getId() + " - " + item.getFriendlyName());
+				} catch (NullPointerException e) {
+					System.out.println("No item found with provided id=" + itemId + ", exiting action...");
+				}
 		}
 	}
 
@@ -112,6 +112,8 @@ public class ConsoleApplication {
 	}
 
 	private static void listItems() {
-		itemFactory.getItems().stream().map(i -> i.getId() + " - " + i.getFriendlyName()).forEach(System.out::println);
+		for (Item item : itemFactory.getItems()) {
+			System.out.println(item.getId() + " - " + item.getFriendlyName());
+		}
 	}
 }

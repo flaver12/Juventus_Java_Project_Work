@@ -15,7 +15,7 @@ public class StorageDAOFactory {
 		return Instance;
 	}
 
-	public StorageDAOInterface createStorageDAO() {
+	public StorageDAO createStorageDAO() {
 		return new StorageDAOMock();
 	}
 }

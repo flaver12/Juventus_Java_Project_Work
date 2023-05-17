@@ -1,15 +1,15 @@
 package org.team42.inventory_system.business;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.team42.inventory_system.persistence.StorageDAOFactory;
-import org.team42.inventory_system.persistence.StorageDAOInterface;
+import org.team42.inventory_system.persistence.StorageDAO;
 
 public class ItemFactory {
 
 	private static ItemFactory theInstance = null;
-	private StorageDAOInterface storageDAO = null;
+	private StorageDAO storageDAO = null;
 
 	private ItemFactory() {
 		storageDAO = StorageDAOFactory.getInstance().createStorageDAO();
@@ -22,36 +22,53 @@ public class ItemFactory {
 		return theInstance;
 	}
 
-	public static BcItem createItem(int id, String friendlyName) {
-		return new BcItem(id, friendlyName);
+	public static Item createItem(int id, String friendlyName) {
+		return new BCItem(id, friendlyName);
 	}
 
-	public static BcItem createItem(String friendlyName) {
-		return new BcItem(friendlyName);
+	public static Item createItem(String friendlyName) {
+		return new BCItem(friendlyName);
 	}
 
-	public BcItem saveItem(Item item) {
-		return storageDAO.insertItem(item.getFriendlyName()).toBcItem();
+	public Item saveItem(Item item) {
+		return this.convertToItem(
+				storageDAO.insertItem(item.getFriendlyName())
+		);
 	}
 
-	public BcItem updateItem(Item item) {
+	public Item updateItem(Item item) {
 		try {
-			return storageDAO.updateItem(item.getId(), item.getFriendlyName()).toBcItem();
+			return this.convertToItem(
+				storageDAO.updateItem(
+					item.getId(),
+					item.getFriendlyName()
+				)
+			);
 		} catch (NullPointerException e) {
 			return null;
 		}
-		
+
 	}
 
 	public Item getItem(int itemId) {
 		try {
-			return storageDAO.getItem(itemId).toBcItem();
+			return this.convertToItem(storageDAO.getItem(itemId));
 		} catch (NullPointerException e) {
 			return null;
 		}
 	}
 
 	public List<Item> getItems() {
-		return storageDAO.getItems().stream().map(i -> i.toBcItem()).collect(Collectors.toList());
+		List<Item> itemList = new ArrayList<Item>();
+
+		for (StorageDAO item : storageDAO.getItems()) {
+			itemList.add(this.convertToItem(item));
+		}
+
+		return itemList;
+	}
+
+	private Item convertToItem(StorageDAO storageItem) {
+		return new BCItem(storageItem.getId(), storageItem.getFriendlyName());
 	}
 }

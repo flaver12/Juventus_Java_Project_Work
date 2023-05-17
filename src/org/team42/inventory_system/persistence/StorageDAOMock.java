@@ -4,46 +4,65 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.team42.inventory_system.persistence.spec.StorageDAOSpecification;
-
-public class StorageDAOMock implements StorageDAOInterface {
+public class StorageDAOMock implements StorageDAO {
 
 	private static final AtomicInteger sequence = new AtomicInteger();
-	private List<StorageDAOSpecification> items = new ArrayList<StorageDAOSpecification>();
+	private List<StorageDAO> items = new ArrayList<StorageDAO>();
+
+	private String friendlyName;
+	private int id;
 
 	@Override
-	public StorageDAOSpecification insertItem(String friendlyName) {
-		final int generatedId = next();
-		this.items.add(generatedId, new StorageDAOSpecification(generatedId, friendlyName));
-		return this.items.get(generatedId);
+	public StorageDAO insertItem(String friendlyName) {
+		StorageDAO item = new StorageDAOMock();
+		item.setId(next());
+		item.setFriendlyName(friendlyName);
+
+		items.add(id, item);
+		return item;
 	}
 
 	@Override
-	public StorageDAOSpecification updateItem(int itemId, String friendlyName) {
+	public StorageDAO getItem(int itemId) {
+		return this.items.get(id);
+	}
+
+	@Override
+	public StorageDAO updateItem(int itemId, String friendlyName) {
 		try {
 			this.items.get(itemId).setFriendlyName(friendlyName);
 			return this.items.get(itemId);
 		} catch (IndexOutOfBoundsException e) {
 			return null;
 		}
-
 	}
 
 	@Override
-	public StorageDAOSpecification getItem(int itemId) {
-		try {
-			return this.items.get(itemId);
-		} catch (IndexOutOfBoundsException e) {
-			return null;
-		}
-	}
-
-	@Override
-	public List<StorageDAOSpecification> getItems() {
+	public List<StorageDAO> getItems() {
 		return this.items;
+	}
+
+	public void setFriendlyName(String friendlyName) {
+		this.friendlyName = friendlyName;
+	}
+
+	@Override
+	public int getId() {
+		return this.id;
+	}
+
+	@Override
+	public String getFriendlyName() {
+		return this.friendlyName;
+	}
+
+	@Override
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	private static int next() {
 		return sequence.getAndIncrement();
 	}
+
 }
