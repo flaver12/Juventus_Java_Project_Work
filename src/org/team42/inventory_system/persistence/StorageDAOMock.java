@@ -12,6 +12,10 @@ public class StorageDAOMock implements StorageDAO {
 	private String friendlyName;
 	private int id;
 
+	/** 
+	 * @param friendlyName Bezeichnung des BCItems
+	 * @return StorageDAO
+	 */
 	@Override
 	public StorageDAO insertItem(String friendlyName) {
 		StorageDAO item = new StorageDAOMock();
@@ -22,11 +26,20 @@ public class StorageDAOMock implements StorageDAO {
 		return item;
 	}
 
+	/** 
+	 * @param itemId Einzigartige ID des BCItems
+	 * @return StorageDAO
+	 */
 	@Override
 	public StorageDAO getItem(int itemId) {
 		return this.items.get(id);
 	}
 
+	/** 
+	 * @param itemId Einzigartige ID des BCItems
+	 * @param friendlyName Bezeichnung des BCItems
+	 * @return StorageDAO
+	 */
 	@Override
 	public StorageDAO updateItem(int itemId, String friendlyName) {
 		try {
@@ -37,30 +50,48 @@ public class StorageDAOMock implements StorageDAO {
 		}
 	}
 
+	/** 
+	 * @return List<StorageDAO>
+	 */
 	@Override
 	public List<StorageDAO> getItems() {
 		return this.items;
 	}
 
+	/** 
+	 * @param friendlyName Bezeichnung des BCItems
+	 */
 	public void setFriendlyName(String friendlyName) {
 		this.friendlyName = friendlyName;
 	}
-
+	
+	/** 
+	 * @return int
+	 */
 	@Override
 	public int getId() {
 		return this.id;
 	}
 
+	/** 
+	 * @return String
+	 */
 	@Override
 	public String getFriendlyName() {
 		return this.friendlyName;
 	}
-
+	
+	/** 
+	 * @param id Einzigartige ID
+	 */
 	@Override
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
+	/** 
+	 * @return int
+	 */
 	private static int next() {
 		return sequence.getAndIncrement();
 	}

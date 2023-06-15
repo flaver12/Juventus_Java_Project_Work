@@ -2,6 +2,9 @@ package org.team42.inventory_system.persistence;
 
 import java.util.List;
 
+/**
+ * Interface für DAO
+ */
 public interface StorageDAO {
 
 	public StorageDAO insertItem(String friendlyName);

@@ -1,5 +1,9 @@
 package org.team42.inventory_system.business;
 
+/**
+ * Das Interface "Item" definiert die Methoden für die Kinder-Klassen
+ */
+
 public interface Item {
 	public int getId();
 

@@ -8,6 +8,10 @@ public class StorageDAOFactory {
 
 	}
 
+	
+	/** 
+	 * @return StorageDAOFactory
+	 */
 	public static StorageDAOFactory getInstance() {
 		if (Instance == null) {
 			Instance = new StorageDAOFactory();
@@ -15,6 +19,10 @@ public class StorageDAOFactory {
 		return Instance;
 	}
 
+	
+	/** 
+	 * @return StorageDAO
+	 */
 	public StorageDAO createStorageDAO() {
 		return new StorageDAOMock();
 	}

@@ -7,16 +7,29 @@ import java.io.InputStreamReader;
 import org.team42.inventory_system.business.Item;
 import org.team42.inventory_system.business.ItemFactory;
 
+/**
+ * Diese Klasse stellt die Funktionalitäten auf der Konsole dar und gibt dem Benutzer die Möglichkeit, mit der Applikation zu interagieren
+ */
+
 public class ConsoleApplication {
 
 	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	static ItemFactory itemFactory = ItemFactory.getInstance();
 
+	
+	/** 
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		System.out.println("App started!");
 		selectAction();
 	}
 
+	
+	/** 
+	 * @throws IOException
+	 */
 	private static void selectAction() throws IOException {
 		System.out.println("What would you like to do?");
 		System.out.println("[C]reate an item");
@@ -51,6 +64,10 @@ public class ConsoleApplication {
 		selectAction();
 	}
 
+	
+	/** 
+	 * @throws IOException
+	 */
 	private static void createItem() throws IOException {
 		System.out.println("Enter a friendlyName for the item: ");
 		String friendlyName = reader.readLine();
@@ -66,6 +83,10 @@ public class ConsoleApplication {
 
 	}
 
+	
+	/** 
+	 * @throws IOException
+	 */
 	private static void updateItem() throws IOException {
 		System.out.println("Enter the id of the item you want to update: ");
 		int itemId;
@@ -93,6 +114,10 @@ public class ConsoleApplication {
 		}
 	}
 
+	
+	/** 
+	 * @throws IOException
+	 */
 	private static void getItem() throws IOException {
 		System.out.println("Enter the id of the item you want: ");
 		int itemId;
