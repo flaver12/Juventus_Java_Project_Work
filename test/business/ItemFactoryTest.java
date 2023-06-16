@@ -15,13 +15,6 @@ class ItemFactoryTest {
 	}
 
 	@Test
-	void testCreateItemWithId() {
-		Item item = ItemFactory.createItem(1, "My Test Item");
-		assertEquals(1, item.getId());
-		assertEquals("My Test Item", item.getFriendlyName());
-	}
-
-	@Test
 	void testCreateItemString() {
 		Item item = ItemFactory.createItem("My Test Item");
 		assertEquals(0, item.getId());

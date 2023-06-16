@@ -32,7 +32,7 @@ public class StorageDAOMock implements StorageDAO {
 	 */
 	@Override
 	public StorageDAO getItem(int itemId) {
-		return this.items.get(id);
+		return this.items.get(itemId);
 	}
 
 	/** 

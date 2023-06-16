@@ -31,16 +31,6 @@ public class ItemFactory {
 	}
 
 	/**
-	 * Erstellt ein Item
-	 * @param id Eindeutige ID des Items
-	 * @param friendlyName Bezeichnung des Items
-	 * @return Gibt das erstellte BCItem zurück
-	 */
-	public static Item createItem(int id, String friendlyName) {
-		return new BCItem(id, friendlyName);
-	}
-
-	/**
 	 * Erstellt ein Item nur mit der Bezeichnung, ohne ID
 	 * @param friendlyName Bezeichnung des Items
 	 * @return Gibt das erstellte BCItem zurück
@@ -58,7 +48,7 @@ public class ItemFactory {
 	/**
 	 * Aktualisiert das Item
 	 * @param item
-	 * @return ??
+	 * @return Item ID und Bezeichnung (oder null)
 	 */
 	public Item updateItem(Item item) {
 		try {
@@ -81,6 +71,7 @@ public class ItemFactory {
 	 */
 	public Item getItem(int itemId) {
 		try {
+			System.out.println("ItemFac getitem " + itemId);
 			return this.convertToItem(storageDAO.getItem(itemId));
 		} catch (NullPointerException e) {
 			return null;
@@ -107,6 +98,7 @@ public class ItemFactory {
 	 * @return BCItem
 	 */
 	private Item convertToItem(StorageDAO storageItem) {
+		System.out.println(storageItem.getId());
 		return new BCItem(storageItem.getId(), storageItem.getFriendlyName());
 	}
 }

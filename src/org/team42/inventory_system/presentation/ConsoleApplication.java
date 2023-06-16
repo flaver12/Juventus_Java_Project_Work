@@ -85,6 +85,7 @@ public class ConsoleApplication {
 
 	
 	/** 
+	 * Führt durch den Prozess zum Anpassen eines Items
 	 * @throws IOException
 	 */
 	private static void updateItem() throws IOException {
@@ -106,7 +107,7 @@ public class ConsoleApplication {
 				break;
 			default:
 				try {
-					Item item = itemFactory.updateItem(ItemFactory.createItem(itemId, friendlyName));
+					Item item = itemFactory.updateItem(ItemFactory.createItem(friendlyName));
 					System.out.println("Updated item: " + item.getId() + " - " + item.getFriendlyName());
 				} catch (NullPointerException e) {
 					System.out.println("No item found with provided id=" + itemId + ", exiting action...");
@@ -116,6 +117,7 @@ public class ConsoleApplication {
 
 	
 	/** 
+	 * Führt durch den Prozess zum Anzeigen eines Items und prüft ob eine gültige ID angegeben wurde
 	 * @throws IOException
 	 */
 	private static void getItem() throws IOException {
@@ -124,6 +126,7 @@ public class ConsoleApplication {
 
 		try {
 			itemId = Integer.parseInt(reader.readLine());
+			System.out.println("Console" + itemId);
 		} catch (NumberFormatException e) {
 			System.out.println("provided invalid id, exiting action...");
 			return;
@@ -136,6 +139,9 @@ public class ConsoleApplication {
 		}
 	}
 
+	/**
+	 * Listet die gespeicherten Items auf
+	 */
 	private static void listItems() {
 		for (Item item : itemFactory.getItems()) {
 			System.out.println(item.getId() + " - " + item.getFriendlyName());
